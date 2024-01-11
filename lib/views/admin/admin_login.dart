@@ -57,7 +57,7 @@ class AdminLoginScreen extends StatelessWidget {
                     decoration: const InputDecoration(
                       filled: true,
                       fillColor: Color(0xFF1C2341),
-                      hintText: "Type Parent/parent",
+                      hintText: "Type Parent Name",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(12),
@@ -68,12 +68,9 @@ class AdminLoginScreen extends StatelessWidget {
                   const Spacer(),
                   GestureDetector(
                     onTap: () {
-                      final userName = userNameController.text;
-                      if (userName == "Parent" || userName == "parent") {
-                        Get.to(
-                          const AdminDashboard(),
-                        );
-                      }
+                      Get.to(
+                        const AdminDashboard(),
+                      );
                     },
                     child: Container(
                       width: double.infinity,

@@ -26,13 +26,24 @@ class _AdminDashboardState extends State<AdminDashboard> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Admin Dashboard"),
+        actions: [
+          GestureDetector(
+              onTap: (){
+                questionController.loadQestionCategoryFromSharedPrefrences();
+              },
+              child: Icon(Icons.refresh)),
+        ],
       ),
       body: GetBuilder<QuestionController>(
         builder: (controller) {
-          return ListView.builder(
+          return
+
+            ListView.builder(
             itemCount: controller.savedCategories.length,
             itemBuilder: (context, index) {
-              return Card(
+              return
+
+                Card(
                 child: ListTile(
                   onTap: () {
                     Get.to(AdminScreen(
@@ -48,7 +59,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     icon: const Icon(Icons.delete),
                   ),
                 ),
-              );
+              ) ;
             },
           );
         },
@@ -86,7 +97,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
       textCancel: "Cancel",
       onConfirm: () {
         questionController.savedQuestionCategoryToSharedPrefrences();
-        questionController.loadQestionCategoryFromSharedPrefrences();
+
+        // questionController.loadQestionCategoryFromSharedPrefrences(): SizedBox();
         Get.back();
       },
     );

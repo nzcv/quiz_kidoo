@@ -5,11 +5,16 @@ import 'package:quiz_application_tut_from_scracth/utils/constants.dart';
 import 'package:quiz_application_tut_from_scracth/views/admin/admin_dashboard.dart';
 import 'package:quiz_application_tut_from_scracth/views/quiz_category.dart';
 import 'package:flutter_gradient_app_bar/flutter_gradient_app_bar.dart';
+import 'package:quiz_application_tut_from_scracth/controllers/question_controller.dart';
+
 
 import 'admin/admin_login.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final TextEditingController userNameController = TextEditingController();
+  final QuestionController _questionController = Get.put(QuestionController());
+
+
   WelcomeScreen({super.key});
 
   @override
@@ -94,16 +99,11 @@ class WelcomeScreen extends StatelessWidget {
                   const Spacer(),
                   GestureDetector(
                     onTap: () {
-                      final userName = userNameController.text;
-                      if (userName == "Parent" || userName == "parent") {
-                        Get.to(
-                          const AdminDashboard(),
-                        );
-                      } else {
-                        Get.to(
-                          QuizCategoryScreen(),
-                        );
-                      }
+                      _questionController.savedCategories.isNotEmpty ?
+                      Get.to(
+                        QuizCategoryScreen(),
+                      ): Get.snackbar("No Question Added", "Please Ask Parent to Add",backgroundColor: Colors.transparent,colorText: Colors.red,snackPosition: SnackPosition.BOTTOM);
+
                     },
                     child: Container(
                       width: double.infinity,
