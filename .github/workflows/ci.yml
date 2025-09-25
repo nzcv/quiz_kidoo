@@ -29,7 +29,18 @@ jobs:
       #     distribution: zulu
       #     java-version: 11
       - name: Build Flutter application for Android
-        run: flutter upgrade && flutter build apk --target-platform=android-arm64
+        run: flutter build apk --target-platform=android-arm64
+      - name: Send feishu message
+        env:
+          ACTIONS_FEISHU_TAG: 'v1.3.1'
+          INPUT_WEBHOOK: "https://open.feishu.cn/open-apis/bot/v2/hook/03d57580-5e06-4ac2-8263-3f1927219fd6"
+          INPUT_MESSAGE_TYPE: "post"
+          INPUT_TITLE: "I'm title"
+          INPUT_CONTENT: "build end\nfrom: ${{ github.repository }}"
+        run: |
+          wget -q https://github.com/xiachufang/actions-feishu/releases/download/${{ env.ACTIONS_FEISHU_TAG }}/linux-amd64-actions-feishu.tar.gz
+          tar zxf linux-amd64-actions-feishu.tar.gz feishu
+          ./feishu
       - name: Rename arm64-v8a APK
         run: mv build/app/outputs/flutter-apk/app-release.apk android-arm64-v8a.apk      
       - name: Upload arm64-v8a APK
